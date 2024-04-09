@@ -6,5 +6,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class KarloPromptConsts {
     public static final String KARLO_IMAGE_GENERATE_PROMPT = """
+           masterpiece, high quality,
+            """;
+
+    public static final String KARLO_IMAGE_GENERATE_NEGATIVE_PROMPT = """
+            
             """;
 }
