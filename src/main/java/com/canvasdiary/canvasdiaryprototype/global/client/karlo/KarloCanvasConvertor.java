@@ -4,10 +4,8 @@ import com.canvasdiary.canvasdiaryprototype.diary.canvas.CanvasConvertProcessing
 import com.canvasdiary.canvasdiaryprototype.diary.canvas.CanvasConvertor;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -17,16 +15,23 @@ import java.util.Objects;
 
 @Component
 public class KarloCanvasConvertor implements CanvasConvertor {
+
+    private final String KAKAO_KEY_API;
     private final WebClient webClient = WebClient.create("https://api.kakaobrain.com/v2/inference/karlo/t2i");
+
+    public KarloCanvasConvertor(@Value("${kakao.key.api}") String key) {
+        this.KAKAO_KEY_API = key;
+    }
 
     @Override
     public String convertDiaryToCanvas(CanvasConvertProcessingData data) {
         return Objects.requireNonNull(webClient.post()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "KakaoAK ")
+                        .header("Authorization", "KakaoAK " + KAKAO_KEY_API)
                         .bodyValue(new KarloRequest(
                                 "v2.1",
                                 KarloPromptConsts.KARLO_IMAGE_GENERATE_PROMPT + data.getDiaryDescription(),
+                                KarloPromptConsts.KARLO_IMAGE_GENERATE_NEGATIVE_PROMPT,
                                 1024L,
                                 1024L
                         )).retrieve()
@@ -43,6 +48,7 @@ public class KarloCanvasConvertor implements CanvasConvertor {
     private static class KarloRequest{
         private String version;
         private String prompt;
+        private String negativePrompt;
         private Long height;
         private Long width;
     }

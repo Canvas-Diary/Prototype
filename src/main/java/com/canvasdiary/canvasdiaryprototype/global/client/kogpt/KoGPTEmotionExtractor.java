@@ -2,7 +2,6 @@ package com.canvasdiary.canvasdiaryprototype.global.client.kogpt;
 
 import com.canvasdiary.canvasdiaryprototype.diary.emotion.EmotionExtractProcessingData;
 import com.canvasdiary.canvasdiaryprototype.diary.emotion.EmotionExtractor;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -10,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -22,13 +22,19 @@ import java.util.Objects;
 @Component
 public class KoGPTEmotionExtractor implements EmotionExtractor {
 
+    private final String KAKAO_KEY_API;
+
     private final WebClient webClient = WebClient.create("https://api.kakaobrain.com/v1/inference/kogpt/generation");
+
+    public KoGPTEmotionExtractor(@Value("${kakao.key.api}") String key) {
+        this.KAKAO_KEY_API = key;
+    }
 
     @Override
     public String extractEmotion(EmotionExtractProcessingData data) {
         return Objects.requireNonNull(webClient.post()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "KakaoAK ")
+                        .header("Authorization", "KakaoAK" + KAKAO_KEY_API)
                         .bodyValue(new KoGPTRequest(
                                 KoGPTPromptConsts.EMOTION_EXTRACT_PROMPT + data.getDiaryDescription(),
                                 120
