@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>일기 작성</title>
+</head>
+<body>
+    <img th:src="@{${diary.canvasImageUrl}}">
+    <div th:text="${diary.emotion}"></div>
+    <div th:text="${diary.extractedEmotion}"></div>
+    <div th:text="${diary.description}"></div>
+</body>
+</html>

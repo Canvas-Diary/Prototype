@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>그림 생성</title>
+</head>
+<body>
+    <form id="diaryForm" action="/diaries" method="post">
+        <input id="emotion" name="emotion" type="text" placeholder="emotion">
+        <textarea id="description" name="description" placeholder="diary content"></textarea>
+    </form>
+    <button type="submit" form="diaryForm">submit</button>
+</body>
+</html>
