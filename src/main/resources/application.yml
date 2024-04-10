@@ -1,3 +1,7 @@
 kakao:
-    key:
-      api: ${KAKAO_REST_API_KEY}
+  key:
+    api: ${KAKAO_REST_API_KEY}
+
+deepl:
+  key:
+    api: ${DEEPL_REST_API_KEY}
