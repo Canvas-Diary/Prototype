@@ -17,6 +17,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Component
@@ -32,6 +33,7 @@ public class KoGPTEmotionExtractor implements EmotionExtractor {
 
     @Override
     public String extractEmotion(EmotionExtractProcessingData data) {
+        log.info("executing emotion extract");
         return Objects.requireNonNull(webClient.post()
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "KakaoAK" + KAKAO_KEY_API)
@@ -47,6 +49,11 @@ public class KoGPTEmotionExtractor implements EmotionExtractor {
 
                         .block())
                 .generations.get(0).text;
+    }
+
+    @Override
+    public CompletableFuture<String> extractEmotionAsync(EmotionExtractProcessingData data) {
+        return CompletableFuture.supplyAsync(() -> extractEmotion(data));
     }
 
     @Getter
