@@ -5,3 +5,7 @@ kakao:
 deepl:
   key:
     api: ${DEEPL_REST_API_KEY}
+
+google:
+  key:
+    gemini: ${GEMINI_REST_API_KEY}
