@@ -34,8 +34,18 @@ h2 {
 img {
   width: 100%;
   height: 100%;
+  border: 1px solid black;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+
+.emotion__container {
+  width: 48%;
+}
+
+.emotion__container > p {
+  font-weight: 600;
+  margin-left: 5px;
 }
 
 .emotions {
@@ -47,8 +57,9 @@ img {
 }
 
 #emotion {
-  width: 48%;
+  width: 100%;
   height: auto;
+  margin-top: 5px;
   padding: 10px;
   border: 1px solid black;
   border-radius: 8px;
