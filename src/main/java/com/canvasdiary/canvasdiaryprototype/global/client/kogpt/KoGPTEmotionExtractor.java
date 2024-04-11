@@ -33,7 +33,7 @@ public class KoGPTEmotionExtractor implements EmotionExtractor {
 
     @Override
     public String extractEmotion(EmotionExtractProcessingData data) {
-        log.info("executing emotion extract");
+        log.info("KoGPT executing emotion extract");
         return Objects.requireNonNull(webClient.post()
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "KakaoAK" + KAKAO_KEY_API)
