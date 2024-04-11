@@ -19,9 +19,7 @@ public class DiaryController {
 
     @PostMapping("/diaries")
     public String postDiary(@ModelAttribute DiaryCreateRequest request, RedirectAttributes redirect) {
-        log.info("request={}", request);
         DiaryCreateResponse diary = diaryService.createDiary(request);
-        log.info("image url={}", diary.canvasImageUrl());
         redirect.addFlashAttribute("diary", diary);
         return "redirect:diaries";
     }
