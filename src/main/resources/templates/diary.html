@@ -8,12 +8,18 @@
   <body>
     <h2>Canvas Diary</h2>
     <div class="container">
-      <img th:src="@{${diary.canvasImageUrl}}" />
+      <img th:src="@{${diary.canvasImageUrl}}" alt="error" />
       <div class="emotions">
-        <div id="emotion" th:text="${diary.emotion}"></div>
-        <div id="emotion" th:text="${diary.extractedEmotion}"></div>
+        <div class="emotion__container">
+          <p>my Emotion</p>
+          <div id="emotion" th:text="${diary.emotion}">hi</div>
+        </div>
+        <div class="emotion__container">
+          <p>extracted Emotion</p>
+          <div id="emotion" th:text="${diary.extractedEmotion}">hi</div>
+        </div>
       </div>
-      <div id="description" th:text="${diary.description}"></div>
+      <div id="description" th:text="${diary.description}">hi</div>
     </div>
   </body>
 </html>
