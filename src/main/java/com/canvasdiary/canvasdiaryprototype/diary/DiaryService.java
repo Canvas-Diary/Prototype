@@ -27,7 +27,7 @@ public class DiaryService {
         String translatedDescription =
                 translator.translateKoreanToEnglish(new TranslatorProcessingData(request.description()));
         String canvasImageUrl =
-                canvasConvertor.convertDiaryToCanvas(new CanvasConvertProcessingData(request.description() + request.emotion()));
+                canvasConvertor.convertDiaryToCanvas(new CanvasConvertProcessingData(translatedDescription, request.emotion()));
         log.info("사진 URL: {}", canvasImageUrl);
         return new DiaryCreateResponse(
                 request.description(),
