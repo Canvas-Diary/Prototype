@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+
 * {
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
+  font-family: "Gowun Batang", serif;
 }
 
 body {

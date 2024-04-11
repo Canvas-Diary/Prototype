@@ -2,13 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>그림 생성</title>
+    <title>일기 작성</title>
     <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
     <h2>Canvas Diary</h2>
     <form id="diaryForm" action="/diaries" method="post">
-      <input id="emotion" name="emotion" type="text" placeholder="emotion" />
+      <select id="emotion" name="emotion" required>
+        <option value="" disabled selected>감정을 선택하세요</option>
+        <option value="anger">분노</option>
+        <option value="fear">두려움</option>
+        <option value="happiness">행복</option>
+        <option value="sadness">슬픔</option>
+        <option value="surprise">놀라움</option>
+        <option value="interest">관심</option>
+        <option value="disgust">혐오</option>
+        <option value="shame">수치심</option>
+      </select>
       <textarea
         id="description"
         name="description"
