@@ -9,4 +9,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CanvasConvertProcessingData {
     private final String diaryDescription;
+    private final String emotion;
 }

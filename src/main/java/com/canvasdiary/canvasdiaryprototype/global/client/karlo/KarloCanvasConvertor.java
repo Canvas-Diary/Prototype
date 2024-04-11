@@ -30,7 +30,7 @@ public class KarloCanvasConvertor implements CanvasConvertor {
                         .header("Authorization", "KakaoAK " + KAKAO_KEY_API)
                         .bodyValue(new KarloRequest(
                                 "v2.1",
-                                KarloPromptConsts.KARLO_IMAGE_GENERATE_PROMPT + data.getDiaryDescription(),
+                                KarloPromptConsts.KARLO_IMAGE_GENERATE_PROMPT + " " + data.getDiaryDescription() + " " + data.getEmotion(),
                                 KarloPromptConsts.KARLO_IMAGE_GENERATE_NEGATIVE_PROMPT,
                                 1024L,
                                 1024L
