@@ -29,8 +29,10 @@ public class DiaryController {
         return "diary";
     }
 
+//    @ResponseBody
 //    @PostMapping("/api/diaries")
 //    public DiaryCreateResponse postDiary(@RequestBody DiaryCreateRequest request){
 //        return diaryService.createDiary(request);
 //    }
+
 }
