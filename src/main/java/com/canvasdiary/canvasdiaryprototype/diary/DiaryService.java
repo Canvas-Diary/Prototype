@@ -19,13 +19,12 @@ public class DiaryService {
     private final EmotionExtractor emotionExtractor;
     private final Translator translator;
 
-
     @SneakyThrows
-    public DiaryCreateResponse createDiary(DiaryCreateRequest request){
-//        String emotion = emotionExtractor.extractEmotion(new EmotionExtractProcessingData(request.description()));
-        var emotion = emotionExtractor.extractEmotionAsync(new EmotionExtractProcessingData(request.description()));
+    public DiaryCreateResponse createDiary(DiaryCreateRequest request) {
         String translatedDescription =
                 translator.translateKoreanToEnglish(new TranslatorProcessingData(request.description()));
+//        String emotion = emotionExtractor.extractEmotion(new EmotionExtractProcessingData(request.description()));
+        var emotion = emotionExtractor.extractEmotionAsync(new EmotionExtractProcessingData(translatedDescription));
         String canvasImageUrl =
                 canvasConvertor.convertDiaryToCanvas(new CanvasConvertProcessingData(translatedDescription, request.emotion()));
         log.info("사진 URL: {}", canvasImageUrl);
@@ -35,6 +34,6 @@ public class DiaryService {
                 emotion.get(),
                 canvasImageUrl
         );
-
     }
+
 }
