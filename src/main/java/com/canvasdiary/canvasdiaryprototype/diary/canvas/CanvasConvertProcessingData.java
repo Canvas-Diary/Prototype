@@ -1,12 +1,11 @@
 package com.canvasdiary.canvasdiaryprototype.diary.canvas;
 
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.canvasdiary.canvasdiaryprototype.diary.emotion.Emotion;
 
-@Getter
-@RequiredArgsConstructor
-public class CanvasConvertProcessingData {
-    private final String diaryDescription;
-    private final String emotion;
+public record CanvasConvertProcessingData(
+        String diaryDescription,
+        Emotion emotion,
+        Style style
+) {
 }
