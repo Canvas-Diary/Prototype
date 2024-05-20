@@ -42,4 +42,15 @@ public class DiaryService {
         );
     }
 
+    @SneakyThrows
+    public DiaryCreateResponse createDiary(DiaryCreateRequest request) {
+        String translatedDescription =
+                translator.translateKoreanToEnglish(new TranslatorProcessingData(request.description()));
+        var emotion = emotionExtractor.extractEmotionAsync(new EmotionExtractProcessingData(translatedDescription));
+        List<String> canvasImageUrl =
+                canvasConvertor.convertDiaryToCanvas(new CanvasConvertProcessingData(translatedDescription, request.emotion(), request.style()));
+        log.info("사진 URL: {}", canvasImageUrl);
+        return new DiaryCreateResponse(canvasImageUrl);
+    }
+
 }
