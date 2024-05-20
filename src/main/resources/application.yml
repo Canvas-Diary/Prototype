@@ -9,3 +9,7 @@ deepl:
 google:
   key:
     gemini: ${GEMINI_REST_API_KEY}
+
+dalle:
+  key:
+    api: ${DALLE_REST_API_KEY}
