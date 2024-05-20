@@ -8,7 +8,9 @@
   <body>
     <h2>Canvas Diary</h2>
     <div class="container">
-      <img th:src="@{${diary.canvasImageUrl}}" alt="error" />
+      <div th:each="url:${diary.canvasImageUrl}">
+        <img th:src="@{${url}}" alt="error" />
+      </div>
       <div class="emotions">
         <div class="emotion__container">
           <p>my Emotion</p>
