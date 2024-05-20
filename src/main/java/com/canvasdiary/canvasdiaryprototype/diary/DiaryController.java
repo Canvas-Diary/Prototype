@@ -1,5 +1,7 @@
 package com.canvasdiary.canvasdiaryprototype.diary;
 
+import com.canvasdiary.canvasdiaryprototype.diary.dto.DiaryCreateRequest;
+import com.canvasdiary.canvasdiaryprototype.diary.dto.DiaryCreateViewResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequiredArgsConstructor
 public class DiaryController {
+
     private final DiaryService diaryService;
 
     @GetMapping("/")
@@ -19,7 +22,7 @@ public class DiaryController {
 
     @PostMapping("/diaries")
     public String postDiary(@ModelAttribute DiaryCreateRequest request, RedirectAttributes redirect) {
-        DiaryCreateResponse diary = diaryService.createDiary(request);
+        DiaryCreateViewResponse diary = diaryService.formCreateDiary(request);
         redirect.addFlashAttribute("diary", diary);
         return "redirect:diaries";
     }
@@ -28,11 +31,5 @@ public class DiaryController {
     public String getDiary() {
         return "diary";
     }
-
-//    @ResponseBody
-//    @PostMapping("/api/diaries")
-//    public DiaryCreateResponse postDiary(@RequestBody DiaryCreateRequest request){
-//        return diaryService.createDiary(request);
-//    }
 
 }

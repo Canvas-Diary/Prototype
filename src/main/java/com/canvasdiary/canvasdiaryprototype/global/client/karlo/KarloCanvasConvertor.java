@@ -16,6 +16,10 @@ import java.util.Objects;
 @Component
 public class KarloCanvasConvertor implements CanvasConvertor {
 
+    private static final long HEIGHT = 1024L;
+    private static final long WIDTH = 1024L;
+    private static final int samples = 3;
+
     private final String KAKAO_KEY_API;
     private final WebClient webClient = WebClient.create("https://api.kakaobrain.com/v2/inference/karlo/t2i");
 
@@ -24,20 +28,23 @@ public class KarloCanvasConvertor implements CanvasConvertor {
     }
 
     @Override
-    public String convertDiaryToCanvas(CanvasConvertProcessingData data) {
+    public List<String> convertDiaryToCanvas(CanvasConvertProcessingData data) {
         return Objects.requireNonNull(webClient.post()
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "KakaoAK " + KAKAO_KEY_API)
                         .bodyValue(new KarloRequest(
                                 "v2.1",
-                                KarloPromptConsts.KARLO_IMAGE_GENERATE_PROMPT + data.getEmotion() + ", " + data.getDiaryDescription(),
+                                KarloPromptConsts.KARLO_IMAGE_GENERATE_PROMPT + data.style() + ", " + data.emotion() + ", " + data.diaryDescription(),
                                 KarloPromptConsts.KARLO_IMAGE_GENERATE_NEGATIVE_PROMPT,
-                                1024L,
-                                1024L
+                                HEIGHT,
+                                WIDTH,
+                                samples
                         )).retrieve()
                         .bodyToMono(KarloResponse.class)
                         .block())
-                .getImages().get(0).image;
+                .images.stream()
+                .map(r -> r.image)
+                .toList();
     }
 
 
@@ -51,6 +58,7 @@ public class KarloCanvasConvertor implements CanvasConvertor {
         private String negativePrompt;
         private Long height;
         private Long width;
+        private Integer samples;
     }
 
     @Getter

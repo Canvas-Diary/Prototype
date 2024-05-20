@@ -35,7 +35,7 @@ public class GeminiEmbeddingEmotionExtractor implements EmotionExtractor {
     public String extractEmotion(EmotionExtractProcessingData data) {
         log.info("Gemini executing embedding emotion extract");
         List<Double> embedding = getEmbedding(data.getDiaryDescription());
-        Emotion emotion = getNearestEmotion(embedding);
+        GeminiEmotionEmbedding emotion = getNearestEmotion(embedding);
         return emotion.name().toLowerCase();
     }
 
@@ -61,11 +61,11 @@ public class GeminiEmbeddingEmotionExtractor implements EmotionExtractor {
                 .embedding.values;
     }
 
-    private Emotion getNearestEmotion(List<Double> embedding) {
-        TreeMap<Double, Emotion> map = new TreeMap<>();
-        Emotion[] emotions = Emotion.values();
+    private GeminiEmotionEmbedding getNearestEmotion(List<Double> embedding) {
+        TreeMap<Double, GeminiEmotionEmbedding> map = new TreeMap<>();
+        GeminiEmotionEmbedding[] emotions = GeminiEmotionEmbedding.values();
         
-        for (Emotion emotion : emotions) {
+        for (GeminiEmotionEmbedding emotion : emotions) {
             map.put(cosineSimilarity(embedding, emotion.getEmbedding()), emotion);
         }
 
