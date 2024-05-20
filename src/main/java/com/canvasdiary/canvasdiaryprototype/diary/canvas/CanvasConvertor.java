@@ -1,5 +1,7 @@
 package com.canvasdiary.canvasdiaryprototype.diary.canvas;
 
+import java.util.List;
+
 public interface CanvasConvertor {
-    String convertDiaryToCanvas(CanvasConvertProcessingData data);
+    List<String> convertDiaryToCanvas(CanvasConvertProcessingData data);
 }
