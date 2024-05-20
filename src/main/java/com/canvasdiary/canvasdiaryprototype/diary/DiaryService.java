@@ -2,6 +2,8 @@ package com.canvasdiary.canvasdiaryprototype.diary;
 
 import com.canvasdiary.canvasdiaryprototype.diary.canvas.CanvasConvertProcessingData;
 import com.canvasdiary.canvasdiaryprototype.diary.canvas.CanvasConvertor;
+import com.canvasdiary.canvasdiaryprototype.diary.dto.DiaryCreateRequest;
+import com.canvasdiary.canvasdiaryprototype.diary.dto.DiaryCreateViewResponse;
 import com.canvasdiary.canvasdiaryprototype.diary.emotion.EmotionExtractProcessingData;
 import com.canvasdiary.canvasdiaryprototype.diary.emotion.EmotionExtractor;
 import com.canvasdiary.canvasdiaryprototype.global.util.translate.Translator;
@@ -15,12 +17,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class DiaryService {
+
     private final CanvasConvertor canvasConvertor;
     private final EmotionExtractor emotionExtractor;
     private final Translator translator;
 
     @SneakyThrows
-    public DiaryCreateResponse createDiary(DiaryCreateRequest request) {
+    public DiaryCreateViewResponse formCreateDiary(DiaryCreateRequest request) {
         String translatedDescription =
                 translator.translateKoreanToEnglish(new TranslatorProcessingData(request.description()));
 //        String emotion = emotionExtractor.extractEmotion(new EmotionExtractProcessingData(request.description()));
@@ -28,7 +31,7 @@ public class DiaryService {
         String canvasImageUrl =
                 canvasConvertor.convertDiaryToCanvas(new CanvasConvertProcessingData(translatedDescription, request.emotion()));
         log.info("사진 URL: {}", canvasImageUrl);
-        return new DiaryCreateResponse(
+        return new DiaryCreateViewResponse(
                 request.description(),
                 request.emotion(),
                 emotion.get(),
