@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
@@ -17,12 +18,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.List;
 import java.util.Objects;
 
+@Primary
 @Component
+@Slf4j
 public class DallECanvasConvertor implements CanvasConvertor {
 
     private static final String HEIGHT = "1024";
     private static final String WIDTH = "1024";
-    private static final int samples = 3;
 
     private final String DALLE_REST_API_KEY;
     private final WebClient webClient = WebClient.create("https://api.openai.com/v1/images/generations");
@@ -33,18 +35,20 @@ public class DallECanvasConvertor implements CanvasConvertor {
 
     @Override
     public List<String> convertDiaryToCanvas(CanvasConvertProcessingData data) {
-        return Objects.requireNonNull(webClient.post()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + DALLE_REST_API_KEY)
-                        .bodyValue(new DallECanvasConvertor.DallERequest(
-                                "dall-e-3",
-                                DallEPromptConsts.DALLE_IMAGE_GENERATE_PROMPT + data.style() + ", " + data.emotion() + ", " + data.diaryDescription(),
-                                1,
-                                "1024x1024"
-                        )).retrieve()
-                        .bodyToMono(DallECanvasConvertor.DallEResponse.class)
-                        .block())
-                .data.stream()
+        List<DallEImageResponse> response = Objects.requireNonNull(webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + DALLE_REST_API_KEY)
+                .bodyValue(new DallERequest(
+                        "dall-e-3",
+                        DallEPromptConsts.DALLE_IMAGE_GENERATE_PROMPT + data.style() + ", " + data.emotion() + ", " + data.diaryDescription(),
+                        1,
+                        HEIGHT + "x" + WIDTH
+                )).retrieve()
+                .bodyToMono(DallEResponse.class)
+                .block()).data;
+        response.forEach(d -> log.info("수정된 프롬프트: {}", d.revisedPrompt));
+
+        return response.stream()
                 .map(r -> r.url)
                 .toList();
     }
@@ -66,7 +70,7 @@ public class DallECanvasConvertor implements CanvasConvertor {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     private static class DallEResponse{
         private String created;
-        private List<DallECanvasConvertor.DallEImageResponse> data;
+        private List<DallEImageResponse> data;
     }
 
 
