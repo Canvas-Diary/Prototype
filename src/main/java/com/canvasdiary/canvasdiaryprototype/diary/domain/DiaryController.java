@@ -1,7 +1,8 @@
-package com.canvasdiary.canvasdiaryprototype.diary;
+package com.canvasdiary.canvasdiaryprototype.diary.domain;
 
-import com.canvasdiary.canvasdiaryprototype.diary.dto.DiaryCreateRequest;
-import com.canvasdiary.canvasdiaryprototype.diary.dto.DiaryCreateViewResponse;
+import com.canvasdiary.canvasdiaryprototype.diary.application.DiaryService;
+import com.canvasdiary.canvasdiaryprototype.diary.application.dto.DiaryCreateRequest;
+import com.canvasdiary.canvasdiaryprototype.diary.application.dto.DiaryCreateViewResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

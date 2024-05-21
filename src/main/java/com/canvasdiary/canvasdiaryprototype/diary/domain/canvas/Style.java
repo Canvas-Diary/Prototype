@@ -1,4 +1,4 @@
-package com.canvasdiary.canvasdiaryprototype.diary.canvas;
+package com.canvasdiary.canvasdiaryprototype.diary.domain.canvas;
 
 import lombok.RequiredArgsConstructor;
 

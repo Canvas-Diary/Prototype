@@ -1,4 +1,4 @@
-package com.canvasdiary.canvasdiaryprototype.diary.dto;
+package com.canvasdiary.canvasdiaryprototype.diary.application.dto;
 
 import java.util.List;
 

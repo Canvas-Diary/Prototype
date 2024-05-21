@@ -1,3 +1,23 @@
+spring:
+  datasource:
+    url: ${LOCAL_DB_URL}
+    username: ${LOCAL_DB_USERNAME}
+    password: ${LOCAL_DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        highlight_sql: true
+#        default_batch_fetch_size: 100
+  jackson:
+    mapper:
+      accept-case-insensitive-enums: true
+
 kakao:
   key:
     api: ${KAKAO_REST_API_KEY}

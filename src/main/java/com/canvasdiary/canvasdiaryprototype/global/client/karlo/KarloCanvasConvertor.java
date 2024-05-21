@@ -1,7 +1,7 @@
 package com.canvasdiary.canvasdiaryprototype.global.client.karlo;
 
-import com.canvasdiary.canvasdiaryprototype.diary.canvas.CanvasConvertProcessingData;
-import com.canvasdiary.canvasdiaryprototype.diary.canvas.CanvasConvertor;
+import com.canvasdiary.canvasdiaryprototype.diary.domain.canvas.CanvasConvertProcessingData;
+import com.canvasdiary.canvasdiaryprototype.diary.domain.canvas.CanvasConvertor;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;

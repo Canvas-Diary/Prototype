@@ -1,4 +1,4 @@
-package com.canvasdiary.canvasdiaryprototype.diary.emotion;
+package com.canvasdiary.canvasdiaryprototype.diary.domain.emotion;
 
 import lombok.RequiredArgsConstructor;
 

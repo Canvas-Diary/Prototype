@@ -1,7 +1,7 @@
 package com.canvasdiary.canvasdiaryprototype.global.client.gemini;
 
-import com.canvasdiary.canvasdiaryprototype.diary.emotion.EmotionExtractProcessingData;
-import com.canvasdiary.canvasdiaryprototype.diary.emotion.EmotionExtractor;
+import com.canvasdiary.canvasdiaryprototype.diary.domain.emotion.EmotionExtractProcessingData;
+import com.canvasdiary.canvasdiaryprototype.diary.domain.emotion.EmotionExtractor;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
